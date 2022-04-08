@@ -17,6 +17,15 @@ test('creates a player object', () => {
 )
 });
 
+test("gets player's stats as an object", () => {
+  const player = new Player('Dave');
+
+  expect(player.getStats()).toHaveProperty('potions');
+  expect(player.getStats()).toHaveProperty('health');
+  expect(player.getStats()).toHaveProperty('strength');
+  expect(player.getStats()).toHaveProperty('agility');
+});
+
 test("gets player's health value", () => {
   const player = new Player ("Dave");
 
@@ -70,4 +79,14 @@ test("uses a potion from the inventory", () => {
   player.usePotion(1);
 
   expect(player.inventory.length).toBeLessThan(oldCount);
+});
+
+test('gets inventory from player or returns false', () => {
+  const player = new Player('Dave');
+
+  expect(player.getInventory()).toEqual(expect.any(Array));
+
+  player.inventory = [];
+
+  expect(player.getInventory()).toEqual(false);
 });
